@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name='drf_tracking_logger',
-    version='1.0',
+    version='1.1',
     author="Ravi Singh",
     author_email="ravisinghofficial@gmail.com",
     description="Log requests on specified logger in JSON format",
