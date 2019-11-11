@@ -22,7 +22,8 @@ class BaseLoggingMixin(object):
 
     def initial(self, request, *args, **kwargs):
         self.log = {}
-        self.log['requested_at'] = now()
+        self.star_time = now()
+        self.log['requested_at'] = str(now())
         super(BaseLoggingMixin, self).initial(request, *args, **kwargs)
 
         try:
@@ -60,7 +61,7 @@ class BaseLoggingMixin(object):
 
             self.log.update(
                 {
-                    'remote_addr': self._get_ip_address(request),
+                    'remote_addr': str(self._get_ip_address(request)),
                     'view': self._get_view_name(request),
                     'view_method': self._get_view_method(request),
                     'path': request.path,
@@ -68,7 +69,8 @@ class BaseLoggingMixin(object):
                     'method': request.method,
                     'user_agent': request.META.get('HTTP_USER_AGENT'),
                     'query_params': str(self._clean_data(request.query_params.dict())),
-                    'user': self._get_user(request),
+                    'user_id': self._get_user(request).id,
+                    'user_email': self._get_user(request).email,
                     'response_ms': self._get_response_ms(),
                     'response': str(self._clean_data(rendered_content)),
                     'status_code': response_code,
@@ -136,7 +138,7 @@ class BaseLoggingMixin(object):
         Get the duration of the request response cycle is milliseconds.
         In case of negative duration 0 is returned.
         """
-        response_timedelta = now() - self.log['requested_at']
+        response_timedelta = now() - self.star_time
         response_ms = int(response_timedelta.total_seconds() * 1000)
         return max(response_ms, 0)
 
