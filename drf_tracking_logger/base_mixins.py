@@ -70,7 +70,7 @@ class BaseLoggingMixin(object):
                     'user_agent': request.META.get('HTTP_USER_AGENT'),
                     'query_params': str(self._clean_data(request.query_params.dict())),
                     'user_id': self._get_user(request).id or '',
-                    'user_email': getattr(self._get_user(request), 'email') or '',
+                    'user_email': getattr(self._get_user(request), 'email', None) or '',
                     'response_ms': self._get_response_ms(),
                     'response': str(self._clean_data(rendered_content)),
                     'status_code': response_code,
