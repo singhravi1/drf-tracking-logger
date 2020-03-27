@@ -62,6 +62,7 @@ class BaseLoggingMixin(object):
             try:
                 self.log.update(
                     {
+                        'headers': request.META,
                         'remote_addr': str(self._get_ip_address(request)),
                         'view': self._get_view_name(request),
                         'view_method': self._get_view_method(request),
