@@ -60,7 +60,24 @@ class BaseLoggingMixin(object):
                 response_code = response.status_code
 
             try:
-                self.log.update(
+                if request.method == 'GET':
+                    log_obj = {
+                            'headers': request.META,
+                            'remote_addr': str(self._get_ip_address(request)),
+                            'view': self._get_view_name(request),
+                            'view_method': self._get_view_method(request),
+                            'path': request.path,
+                            'host': request.get_host(),
+                            'method': request.method,
+                            'user_agent': request.META.get('HTTP_USER_AGENT'),
+                            'query_params': str(self._clean_data(request.query_params.dict())),
+                            'user_id': str(self._get_user(request).id or ''),
+                            'user_email': getattr(self._get_user(request), 'email', None) or '',
+                            'response_ms': self._get_response_ms(),
+                            # 'response': str(self._clean_data(rendered_content)),
+                            'status_code': response_code,
+                        }
+                else:
                     {
                         'headers': request.META,
                         'remote_addr': str(self._get_ip_address(request)),
@@ -77,7 +94,8 @@ class BaseLoggingMixin(object):
                         'response': str(self._clean_data(rendered_content)),
                         'status_code': response_code,
                     }
-                )
+                
+                self.log.update(log_obj)
                 if not connection.settings_dict.get('ATOMIC_REQUESTS'):
                     self.handle_log()
                 elif response.exception and not connection.in_atomic_block or not response.exception:
