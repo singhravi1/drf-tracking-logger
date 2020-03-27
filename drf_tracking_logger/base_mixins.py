@@ -78,7 +78,7 @@ class BaseLoggingMixin(object):
                             'status_code': response_code,
                         }
                 else:
-                    {
+                    log_obj = {
                         'headers': request.META,
                         'remote_addr': str(self._get_ip_address(request)),
                         'view': self._get_view_name(request),
