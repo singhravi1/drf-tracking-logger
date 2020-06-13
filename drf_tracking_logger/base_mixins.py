@@ -62,7 +62,7 @@ class BaseLoggingMixin(object):
             try:
                 if request.method == 'GET':
                     log_obj = {
-                            'headers': request.META,
+                            'headers': {str(key): str(value) for key, value in request.META.items()},
                             'remote_addr': str(self._get_ip_address(request)),
                             'view': self._get_view_name(request),
                             'view_method': self._get_view_method(request),
@@ -79,7 +79,7 @@ class BaseLoggingMixin(object):
                         }
                 else:
                     log_obj = {
-                        'headers': request.META,
+                        'headers': {str(key): str(value) for key, value in request.META.items()},
                         'remote_addr': str(self._get_ip_address(request)),
                         'view': self._get_view_name(request),
                         'view_method': self._get_view_method(request),
