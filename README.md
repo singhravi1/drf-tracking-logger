@@ -1,6 +1,6 @@
 ## DRF Tracking logger
 
-[![pypi-version]][pypi]
+[![PyPi version](https://badgen.net/pypi/v/pip/)](https://pypi.org/project/drf-tracking-logger/)
 
 A spinoff of the [drf-tracking](https://github.com/aschn/drf-tracking) to forward the logging to the standard output instead of saving it in the database
 
