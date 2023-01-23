@@ -1,4 +1,4 @@
-## DRF Tracking logger
+## DRF Request logger
 
 [![PyPi version](https://badgen.net/pypi/v/drf-tracking-logger/)](https://pypi.org/project/drf-tracking-logger/)
 
