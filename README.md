@@ -34,7 +34,7 @@ class AnyRandomView(LoggingMixin, ListModelMixin, GenericAPIView):
 - `sensitive_fields` : By default, any key name which has any of `'key', 'secret', 'password', 'signature'` in its name, will get its value hidden. But you can extend this list by adding more using this attribute.
 
 ## Logging Overview
-drf-tracking provides a Django model and DRF view mixin that work together to log Django Rest Framework requests to the database. You'll get these attributes for every request/response cycle to a view that uses the mixin:
+You'll get these attributes for every request/response cycle to a view that uses the mixin:
 
  Model field name | Description | Model field type
 ------------------|-------------|-----------------
@@ -49,5 +49,5 @@ drf-tracking provides a Django model and DRF view mixin that work together to lo
 `method` | HTTP method, e.g., `"GET"` | CharField
 `query_params` | Dictionary of request query parameters, as text | TextField
 `data` | Dictionary of POST data (JSON or form), as text | TextField
-`response` | JSON response data | TextField
+`response` | JSON response data. **This will be skipped for GET requests** | TextField
 `status_code` | HTTP status code, e.g., `200` or `404` | PositiveIntegerField
