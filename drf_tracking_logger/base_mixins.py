@@ -116,8 +116,6 @@ class BaseLoggingMixin(object):
     def handle_log(self):
         """
         Hook to define what happens with the log.
-
-        Defaults on saving the data on the db.
         """
         raise NotImplementedError
 

@@ -9,10 +9,8 @@ class LoggingMixin(BaseLoggingMixin):
     def handle_log(self):
         """
         Hook to define what happens with the log.
-
-        Defaults on saving the data on the db.
         """
-        if self.log['status_code'] == 200:
+        if self.log['status_code'] < 400:
             logger.info(self.log)
         else:
             logger.error(self.log)

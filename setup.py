@@ -6,7 +6,7 @@ long_description = (this_directory / "README.md").read_text()
 
 setuptools.setup(
     name='drf_tracking_logger',
-    version='1.9.5',
+    version='1.9.6',
     author="Ravi Singh",
     author_email="ravi.singh@startxlabs.com",
     description="Log DRF requests on specified logger",
